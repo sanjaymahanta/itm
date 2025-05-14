@@ -6,11 +6,13 @@ import org.testng.annotations.Test;
 import com.baseclass.BaseClass;
 import com.pages.DashboardPage;
 import com.pages.HomePage;
+import com.pages.UserPage;
 
-public class TestDashboardPage extends BaseClass {
+public class TestUserPage extends BaseClass {
 
 	HomePage hp;
 	DashboardPage dp;
+	UserPage up;
 
 	@BeforeMethod
 	public void setup() {
@@ -26,15 +28,16 @@ public class TestDashboardPage extends BaseClass {
 		hp.enterPassword();
 		hp.clickSignIn();
 		dp = new DashboardPage(driver);
-		
-	}
-	
-	
-	@Test
-	public void clickUsers() {
-		
-		dp.clickUsers();
 	}
 
-	
+	@Test(description = "To Test Deleted user should be reinstated by restore")
+	public void testRestoreUser() {
+		dp.clickUsers();
+		UserPage up = new UserPage(driver);
+		up.clickSerach();
+		up.clickSearchIcon();
+		up.hoverOverSettingIcon(driver);
+//        dp.deleteUser();
+
+	}
 }
