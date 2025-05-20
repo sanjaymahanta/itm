@@ -22,6 +22,25 @@ public class UserPage extends BaseClass {
 
 	@FindBy(xpath = "//i[@class='fa fa-trash']")
 	WebElement delete;
+	
+	@FindBy(xpath = "//button[text()='Yes']")
+	WebElement selectOption;
+	
+	
+	@FindBy(xpath = "//button[text()='OK']")
+	WebElement promptSucces;
+	
+	@FindBy(xpath = "//i[@class='ps-icon fa fa-recycle']")
+	WebElement showDeletedUserIcon;
+	
+	@FindBy(css = ".username.hidden-xs")
+	WebElement logoutDropdown;
+	
+	@FindBy(xpath = "//i[@class='demo-pli-unlock']")
+	 WebElement logout;
+	
+	@FindBy(xpath = "//i[@class='fa fa-recycle']")
+	WebElement restoringUser;
 
 	public UserPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -43,5 +62,25 @@ public class UserPage extends BaseClass {
 
 	public void deleteUser() {
 		delete.click();
+		selectOption.click();
+		promptSucces.click();
+		
 	}
-}
+	
+	public void clickRestoreUser() {
+		showDeletedUserIcon.click();
+		hoverOverSettingIcon(driver);
+		restoringUser.click();
+	}
+	
+	
+	public void applicationLogout()  {
+		WaitUtils.waitElement(logoutDropdown);
+		logoutDropdown.click();
+		WaitUtils.waitElement(logout);
+		logout.click();
+	}
+	
+	}
+	
+

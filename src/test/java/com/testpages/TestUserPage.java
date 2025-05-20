@@ -7,6 +7,7 @@ import com.baseclass.BaseClass;
 import com.pages.DashboardPage;
 import com.pages.HomePage;
 import com.pages.UserPage;
+import com.utilities.WaitUtils;
 
 public class TestUserPage extends BaseClass {
 
@@ -30,14 +31,36 @@ public class TestUserPage extends BaseClass {
 		dp = new DashboardPage(driver);
 	}
 
-	@Test(description = "To Test Deleted user should be reinstated by restore")
+	@Test(description = "To Test Deleted user should be reinstated by restore" ,enabled = false)
 	public void testRestoreUser() {
 		dp.clickUsers();
 		UserPage up = new UserPage(driver);
 		up.clickSerach();
 		up.clickSearchIcon();
 		up.hoverOverSettingIcon(driver);
-//        dp.deleteUser();
+		up.deleteUser();
+		up.clickRestoreUser();
 
 	}
+	
+	
+
+	@Test(description = "To Test Deleted user should not be login in application" )
+	public void testDeletedUser()   {
+		dp.clickUsers();
+		UserPage up = new UserPage(driver);
+		up.clickSerach();
+		up.clickSearchIcon();
+		up.hoverOverSettingIcon(driver);
+		up.deleteUser();
+		up.applicationLogout();
+		
+//		hp.enterUsername("sanjay.normaluser");
+//		hp.clickContinue();
+//		hp.enterPassword();
+//		hp.clickSignIn();
+		
+
+	}
+	
 }

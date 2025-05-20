@@ -30,10 +30,10 @@ public class TestDashboardPage extends BaseClass {
 	}
 	
 	
-	@Test
+	@Test(description = "to test user is reinstated")
 	public void clickUsers() {
 		
-		dp.clickUsers();
+	dp.clickUsers();
 	}
 
 	
