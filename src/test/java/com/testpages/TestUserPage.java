@@ -1,5 +1,6 @@
 package com.testpages;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -55,10 +56,11 @@ public class TestUserPage extends BaseClass {
 		up.deleteUser();
 		up.applicationLogout();
 		
-//		hp.enterUsername("sanjay.normaluser");
-//		hp.clickContinue();
-//		hp.enterPassword();
-//		hp.clickSignIn();
+		hp.enterUsername("sanjay.normaluser");
+		hp.clickContinue();
+
+		 String expectedError = "Please enter valid username to continue"; // Change based on actual error message
+		    Assert.assertTrue(driver.getPageSource().contains(expectedError), "Deleted user was unaable to login!");
 		
 
 	}

@@ -1,5 +1,6 @@
 package com.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +42,10 @@ public class UserPage extends BaseClass {
 	
 	@FindBy(xpath = "//i[@class='fa fa-recycle']")
 	WebElement restoringUser;
+	
+	@FindBy(xpath = "//span[text()='Please enter valid username to continue']")
+	WebElement captureMessageDU;
+	
 
 	public UserPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -61,11 +66,14 @@ public class UserPage extends BaseClass {
 	}
 
 	public void deleteUser() {
-		delete.click();
-		selectOption.click();
-		promptSucces.click();
-		
+	    WaitUtils.waitUntilClickable(delete);
+	    delete.click();
+	    WaitUtils.waitUntilClickable(selectOption);
+	    selectOption.click();
+	    WaitUtils.waitUntilClickable(promptSucces);
+	    promptSucces.click();
 	}
+
 	
 	public void clickRestoreUser() {
 		showDeletedUserIcon.click();
@@ -74,12 +82,17 @@ public class UserPage extends BaseClass {
 	}
 	
 	
-	public void applicationLogout()  {
-		WaitUtils.waitElement(logoutDropdown);
-		logoutDropdown.click();
-		WaitUtils.waitElement(logout);
-		logout.click();
+	public void applicationLogout() {
+	    try {
+	        WaitUtils.waitElement(logoutDropdown);
+	        logoutDropdown.click();
+	        WaitUtils.waitElement(logout);
+	        logout.click();
+	    } catch (NoSuchElementException e) {
+	        System.out.println("User is probably already logged out or element not found.");
+	    }
 	}
+
 	
 	}
 	

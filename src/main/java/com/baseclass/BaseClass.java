@@ -28,17 +28,17 @@ public static WebDriver driver = null;
 
 		String browserName = PropertiesUtils.readProperty("browser");
 		if (browserName.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "D:/chromedriver136.exe");
+			System.setProperty("webdriver.chrome.driver", "C:/chromedriver136.exe");
 			driver = new ChromeDriver();
 
 		}
-		if (browserName.equalsIgnoreCase("gecko")) {
-			System.setProperty("webdriver.gecko.driver", "D:/geckodriver.exe");
+		if (browserName.equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.gecko.driver", "C:/geckodriver.exe");
 			driver = new FirefoxDriver();
 
 		}
 		if (browserName.equalsIgnoreCase("edge")) {
-			System.setProperty("webdriver.edge.driver", "D:/msedgedriver.exe");
+			System.setProperty("webdriver.edge.driver", "C:/msedgedriver.exe");
 			driver = new EdgeDriver();
 
 		}
