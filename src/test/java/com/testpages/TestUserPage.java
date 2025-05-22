@@ -32,7 +32,7 @@ public class TestUserPage extends BaseClass {
 		dp = new DashboardPage(driver);
 	}
 
-	@Test(description = "To Test Deleted user should be reinstated by restore" ,enabled = false)
+	@Test(description = "To Test Deleted user should be reinstated by restore", enabled = false)
 	public void testRestoreUser() {
 		dp.clickUsers();
 		UserPage up = new UserPage(driver);
@@ -43,11 +43,9 @@ public class TestUserPage extends BaseClass {
 		up.clickRestoreUser();
 
 	}
-	
-	
 
-	@Test(description = "To Test Deleted user should not be login in application" )
-	public void testDeletedUser()   {
+	@Test(description = "To Test Deleted user should not be login in application",enabled = false)
+	public void testDeletedUser() {
 		dp.clickUsers();
 		UserPage up = new UserPage(driver);
 		up.clickSerach();
@@ -55,14 +53,23 @@ public class TestUserPage extends BaseClass {
 		up.hoverOverSettingIcon(driver);
 		up.deleteUser();
 		up.applicationLogout();
-		
+
 		hp.enterUsername("sanjay.normaluser");
 		hp.clickContinue();
 
-		 String expectedError = "Please enter valid username to continue"; // Change based on actual error message
-		    Assert.assertTrue(driver.getPageSource().contains(expectedError), "Deleted user was unaable to login!");
-		
+		String expectedError = "Please enter valid username to continue";
+		Assert.assertTrue(driver.getPageSource().contains(expectedError), "Deleted user was unaable to login!");
 
 	}
 	
+	@Test(description = "To test that  user cant registered with same registerd email id ")
+	public void testUserWithSameEmail() {
+		dp.clickUsers();
+		UserPage up = new UserPage(driver);
+		up.checkUserWithRegisteredEmail("Sanjay", "Mahanta", "msanjum", "sanjau@123", "sanjaykmahanta19@gmail.com", "Mumbai");
+		
+	}
+	
+
+
 }

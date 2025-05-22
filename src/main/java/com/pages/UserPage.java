@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.baseclass.BaseClass;
 import com.utilities.ActionUtils;
+import com.utilities.DropdownUtils;
 import com.utilities.WaitUtils;
 
 public class UserPage extends BaseClass {
@@ -45,6 +47,33 @@ public class UserPage extends BaseClass {
 	
 	@FindBy(xpath = "//span[text()='Please enter valid username to continue']")
 	WebElement captureMessageDU;
+	
+	@FindBy(xpath = "//i[@class='ps-icon fa fa-plus']")
+	WebElement addUser;
+	
+	@FindBy(css = "input[placeholder='Enter First Name']")
+	WebElement firstName;
+	
+	@FindBy(xpath = "//input[@name='last_name']")
+	WebElement lastName;
+	
+	
+	@FindBy(xpath = "//input[@name='username']")
+	WebElement username;
+	
+	@FindBy(xpath = "//input[@name='password']")
+	WebElement password;
+	
+	
+	@FindBy(xpath = "//input[@name='email']")
+	WebElement email;
+	
+	@FindBy(css = "#location_id")
+	WebElement location;
+	
+
+	
+	
 	
 
 	public UserPage(WebDriver driver) {
@@ -92,8 +121,35 @@ public class UserPage extends BaseClass {
 	        System.out.println("User is probably already logged out or element not found.");
 	    }
 	}
-
 	
+	
+	public void checkUserWithRegisteredEmail(String fName, String lName, String uname, String pass, String mail,String locationName) {
+		WaitUtils.waitUntilClickable(addUser);
+		addUser.click();
+		WaitUtils.waitUntilClickable(firstName);
+		firstName.click();
+		firstName.sendKeys(fName);
+		WaitUtils.waitUntilClickable(lastName);
+		lastName.click();
+		lastName.sendKeys(lName);
+		
+		WaitUtils.waitUntilClickable(username);
+	    username.click();
+	    username.sendKeys(uname);
+	    
+	    WaitUtils.waitUntilClickable(password);
+	    password.click();
+	    password.sendKeys(pass);
+	    
+	    WaitUtils.waitUntilClickable(email);
+	    email.click();
+	    email.sendKeys(mail);
+		DropdownUtils.selectByVisibleText(location, locationName);
+		
+		
 	}
+
+}
+	
 	
 
